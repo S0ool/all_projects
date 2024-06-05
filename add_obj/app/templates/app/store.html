@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+<h2>Поиск</h2>
+<form action="" method="get">
+    <input type="text" name="search">
+    <button>Найти</button>
+</form></div>
+<div>
+<h2>Добавить</h2>
+<form action="/add_category" method="post">
+    {% csrf_token %}
+    <input type="text" name="category_name">
+    <input hidden="hidden" type="text" name="store_name" value="{{store}}">
+    <button>Сохранить</button>
+</form>
+<h2>Удалить</h2>
+<form action="/delete_category" method="post">
+    {% csrf_token %}
+    <input type="text" name="category_id">
+    <input hidden="hidden" type="text" name="store_name" value="{{store}}">
+    <button>Удалить</button>
+</form>
+<h2>Изменить</h2>
+<form action="/update_category" method="post">
+    {% csrf_token %}
+    id <input type="text" name="category_id"><br><br>
+    name <input type="text" name="category_name"><br><br>
+    <input hidden="hidden" type="text" name="store_name" value="{{store}}">
+    <button>Изменить</button>
+</form>
+</div>
+<h2>{{store}}</h2>
+<div>
+    {% for category in categories %}
+        <a href="{% url 'category' categoryId=category.id %}">{{category.id}}. {{category.name}}</a><br>
+    {% endfor %}
+</div>
+</body>
+</html>

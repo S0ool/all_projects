@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+<h2>Поиск</h2>
+<form action="" method="get">
+    <input type="text" name="search">
+    <button>Найти</button>
+</form></div>
+<div>
+<h2>Добавить</h2>
+<form action="/add_product" method="post">
+    {% csrf_token %}
+    name <input type="text" name="product_name"><br><br>
+    price <input type="text" name="product_price"><br><br>
+    <input hidden="hidden" type="text" name="category_name" value="{{category}}">
+    <button>Сохранить</button>
+</form>
+<h2>Удалить</h2>
+<form action="/delete_product" method="post">
+    {% csrf_token %}
+    <input type="text" name="product_id">
+    <input hidden="hidden" type="text" name="category_name" value="{{category}}">
+    <button>Удалить</button>
+</form>
+<h2>Изменить</h2>
+<form action="/update_product" method="post">
+    {% csrf_token %}
+    id   <input type="text" name="product_id"><br><br>
+    name <input type="text" name="product_name"><br><br>
+    price <input type="text" name="product_price"><br><br>
+    <input hidden="hidden" type="text" name="category_name" value="{{category}}">
+    <button>Изменить</button>
+</form>
+</div>
+<h2>{{category}}</h2>
+<div>
+    {% for product in products %}
+        <div>{{product.id}}. {{product.name}}</div>
+    {% endfor %}
+</div>
+</body>
+</html>

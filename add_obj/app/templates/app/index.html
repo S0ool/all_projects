@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+<h2>Поиск</h2>
+<form action="" method="get">
+    <input type="text" name="search">
+    <button>Найти</button>
+</form></div>
+<div>
+<h2>Добавить</h2>
+<form action="/add" method="post">
+    {% csrf_token %}
+    <input type="text" name="store_name">
+    <button>Сохранить</button>
+</form>
+</div>
+<h2>Магазины</h2>
+<div>
+    {% for shop in shops %}
+        <a href="{% url 'store' storeId=shop.id %}">{{shop.id}}. {{shop.name}}</a><br>
+    {% endfor %}
+</div>
+</body>
+</html>
